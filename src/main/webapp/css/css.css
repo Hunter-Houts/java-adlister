@@ -1,0 +1,12 @@
+body{
+    background-color: lightblue;
+    text-align: center;
+}
+.ad {
+    background-color: lightgray;
+    margin: 0 200px 0;
+
+}
+h1.ad{
+    text-decoration: underline;
+}
