@@ -8,6 +8,6 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         request.getSession().invalidate();
-        response.sendRedirect("/");
+        response.sendRedirect("/login");
     }
 }
