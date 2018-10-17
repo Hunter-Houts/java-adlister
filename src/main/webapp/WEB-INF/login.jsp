@@ -11,7 +11,7 @@
         <h1>Please Log In</h1>
         <form action="/login" method="POST">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Email</label>
                 <input id="username" name="username" class="form-control" type="text">
             </div>
             <div class="form-group">

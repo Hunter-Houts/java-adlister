@@ -1,5 +1,4 @@
 package com.codeup.adlister.dao;
-
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
@@ -40,9 +39,14 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Long insert(Ad ad) {
+        String sql = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+
         try {
-            Statement stmt = connection.createStatement();
-            stmt.executeUpdate(createInsertQuery(ad), Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setFloat(1,ad.getUserId());
+            stmt.setString(2,ad.getTitle());
+            stmt.setString(3,ad.getDescription());
+            stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);
@@ -52,10 +56,16 @@ public class MySQLAdsDao implements Ads {
     }
 
     private String createInsertQuery(Ad ad) {
-        return "INSERT INTO ads(user_id, title, description) VALUES "
-            + "(" + ad.getUserId() + ", "
-            + "'" + ad.getTitle() +"', "
-            + "'" + ad.getDescription() + "')";
+        try {
+            PreparedStatement stmt = connection.prepareStatement("", Statement.RETURN_GENERATED_KEYS);
+            stmt.setFloat(1,ad.getUserId());
+            stmt.setString(2,ad.getTitle());
+            stmt.setString(3,ad.getDescription());
+            return stmt.toString();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
