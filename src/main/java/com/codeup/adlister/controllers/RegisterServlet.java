@@ -22,8 +22,8 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         if(!email.isEmpty() && !password.isEmpty()){
-            int id = (int) Math.floor(Math.random() * 1000000000) + 1;
-            User newPerson = new User(id,email,password);
+//            int id = (int) Math.floor(Math.random() * 1000000000) + 1;
+            User newPerson = new User(email,password);
             DaoFactory.getUsersDao().insert(newPerson);
             try {
                 request.getSession().setAttribute("user",email);
