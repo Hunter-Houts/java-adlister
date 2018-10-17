@@ -43,14 +43,14 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public Long insert(User user) {
-        String sql = "INSERT INTO Users(id,email, password) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Users(email, password) VALUES (?, ?)";
 
         try {
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            stmt.setFloat(1,user.getId());
-            stmt.setString(2,user.getEmail());
-            stmt.setString(3,user.getPassword());
+
+            stmt.setString(1,user.getEmail());
+            stmt.setString(2,user.getPassword());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
