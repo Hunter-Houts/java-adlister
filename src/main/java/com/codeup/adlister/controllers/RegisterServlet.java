@@ -32,6 +32,12 @@ public class RegisterServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
+        } else {
+            try {
+                response.sendRedirect("/register");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         // TODO: ensure the submitted information is valid
